@@ -7,3 +7,10 @@ logger:
     messageKey: message
     levelKey: level
     levelEncoder: lowercase
+
+database:
+  host:   localhost
+  port:   5432
+  user:   default_user
+  pass:   1
+  dbname: catalog

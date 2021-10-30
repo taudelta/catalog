@@ -17,8 +17,17 @@ type LoggerConfig struct {
 	} `json:"encoderConfig"`
 }
 
+type DatabaseConfig struct {
+	Host   string `json:"host"`
+	Port   string `json:"port"`
+	User   string `json:"user"`
+	Pass   string `json:"pass"`
+	Dbname string `json:"dbname"`
+}
+
 type Config struct {
-	Logger LoggerConfig `json:"logger"`
+	Logger   LoggerConfig   `json:"logger"`
+	Database DatabaseConfig `json:"database"`
 }
 
 func Init() (*Config, error) {

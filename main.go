@@ -15,6 +15,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/stanyx/catalog/app/handler"
 	"github.com/stanyx/catalog/config"
+	"github.com/stanyx/catalog/internal/storage"
 )
 
 func main() {
@@ -55,8 +56,18 @@ func main() {
 
 	handler.RegisterEndpoints(r)
 
+	if err := storage.InitDB(storage.DatabaseOptions{
+		Host:   appConfig.Database.Host,
+		Port:   appConfig.Database.Port,
+		User:   appConfig.Database.User,
+		Pass:   appConfig.Database.Pass,
+		Dbname: appConfig.Database.Dbname,
+	}); err != nil {
+		logger.Sugar().Fatalf("database error: %s", err)
+	}
+
 	server := http.Server{
-		Addr:    ":8080",
+		Addr:    ":10000",
 		Handler: r,
 	}
 
